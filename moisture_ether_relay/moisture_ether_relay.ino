@@ -7,6 +7,27 @@
   This minimal code generates sensor node inputs samples and being used
   for IoT analytics. There is also an Android app developed to test if the
   sensor node gives the right output.
+  
+  *****************************
+  Ethernet Connection:
+  VCC -   3.3V
+  GND -    GND
+  SCK - Pin 13
+  SO  - Pin 12
+  SI  - Pin 11
+  CS  - Pin  8
+  
+  Relay Connection:
+  5V  -    5V
+  GND -    GND
+  IN  -    9
+  
+  Moisture Sensor Connection:
+  VCC -    5V
+  GND -    GND
+  AO  -    A0
+  
+  *****************************
  */
 
 int sensorPin = A0;    // select the input pin for the potentiometer
@@ -15,7 +36,7 @@ int ledPin = 13;      // select the pin for the LED
 int sensorValue = 0;  // variable to store the value coming from the sensor
 int engineOnThreshold = 800; // turn on water machine when moisture reading is above 800.
 int engineOffThreshold = 500; // turn off water engine when there is anough watering done.
-int scanInterval = 1000; // check moisture level after every second. [1 sec = 1000 ms]
+int scanInterval = 20; // check moisture level after every second. [1 sec = 1000 ms]
 
 // ethernet interface mac address, must be unique on the LAN
 static byte mymac[] = { 0x10,0x2A,0x3B,0x4C,0x5D,0x6E };
@@ -64,7 +85,7 @@ void loop() {
 
 void readMoisture() {
   sensorValue = analogRead(sensorPin);
-  Serial.println(sensorValue);
+ // Serial.println(sensorValue);
 }
 
 void controlMotor() {
